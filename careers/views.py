@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .forms import Internshipform,Volunteerform
+from django.contrib import messages
 
 
 def careers(response):
@@ -13,6 +14,7 @@ def internform(request):
 			form.save()
 			return redirect('careers')
 		else:
+			messages.error(request,"Invalid credentials")
 			form = Internshipform()
 			context = {'form':form}
 			return render(request,"careers/internship.html",context)
@@ -28,6 +30,7 @@ def volunteerform(request):
 			form.save()
 			return redirect('careers')
 		else:
+			messages.error(request,"Invalid credentials")
 			form = Volunteerform()
 			context = {'form':form}
 			return render(request,"careers/internship.html",context)
